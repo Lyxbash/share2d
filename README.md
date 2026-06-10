@@ -261,7 +261,7 @@ The easiest way for **two devices on any network** (phone on mobile data + lapto
 2. Go to [render.com](https://render.com) → New → **Web Service**
 3. Connect your repo — Render reads `render.yaml` automatically
 4. Or set manually:
-   - **Build command:** `npm install && npm run build`
+   - **Build command:** `npm install --include=dev && npm run build`
    - **Start command:** `npm start`
    - **Health check path:** `/health`
 5. Deploy — you get a URL like `https://share2d-xxxx.onrender.com`
@@ -271,7 +271,7 @@ The easiest way for **two devices on any network** (phone on mobile data + lapto
 
 | Platform | Build | Start | Notes |
 |---|---|---|---|
-| Render | `npm install && npm run build` | `npm start` | Free tier, ~30s cold start |
+| Render | `npm install --include=dev && npm run build` | `npm start` | Free tier, ~30s cold start |
 | Railway | same | same | Requires credit card |
 | Fly.io | same | same | Good for always-on |
 | VPS | same | `NODE_ENV=production npm start` | Use PM2 or systemd |

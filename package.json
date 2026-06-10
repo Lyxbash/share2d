@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w client",
     "start": "npm run start -w server",
-    "start:prod": "npm run build && npm run start"
+    "start:prod": "npm install --include=dev && npm run build && npm run start"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
