@@ -21,7 +21,7 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 | Problem | How share2d solves it |
 |---|---|
 | Can't install apps on a work machine | Runs entirely in the browser |
-| USB / Bluetooth / AirDrop not available | Works over the internet via a URL |
+| USB, Bluetooth, or nearby share not available | Works over the internet via a URL |
 | Email or Drive feels heavy for one snippet | Paste and it appears instantly |
 | Need to test something on a phone from a laptop | QR code or room code - join in seconds |
 
@@ -41,8 +41,8 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 ## Features
 
 - **Create or join a room** with a 4-character code
-- **Type text** in the bottom composer, or **Ctrl+V** to paste anywhere on the page
-- **Paste screenshots** - Win+Shift+S (Windows) → Ctrl+V sends the image instantly
+- **Type text** in the bottom composer, or **paste** anywhere on the page
+- **Paste images** - snip or screenshot on your device, then paste into the room
 - **Attach files** - paperclip button on the left of the typing box
 - **Drag and drop** files, images, PDFs, code files
 - **Realtime sync** - every connected device sees updates immediately
@@ -62,14 +62,14 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 3. On your other device, open the same link or enter the code
 4. Type, paste, or drop files - they appear on every device in the room
 
-**Keyboard shortcuts**
+**Shortcuts**
 
 | Action | How |
 |---|---|
-| Send text | Type in composer → Enter |
+| Send text | Type in the box, press Enter |
 | New line | Shift + Enter |
-| Paste text / screenshot | Ctrl + V anywhere on the page |
-| Upload file | Paperclip in the typing box, drag onto page, or Ctrl+V |
+| Paste text or image | Paste anywhere on the page (desktop), or into the typing box |
+| Upload file | Paperclip in the typing box, drag onto the page, or paste a file |
 
 ---
 

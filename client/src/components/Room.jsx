@@ -174,7 +174,7 @@ export default function Room() {
   }, [code, showToast]);
 
   const uploadBlob = useCallback(async (blob) => {
-    const file = new File([blob], `screenshot-${Date.now()}.png`, { type: blob.type || 'image/png' });
+    const file = new File([blob], `image-${Date.now()}.png`, { type: blob.type || 'image/png' });
     await uploadFile(file);
   }, [uploadFile]);
 
@@ -304,7 +304,7 @@ export default function Room() {
             <div className="empty-state">
               <div className="empty-icon">✦</div>
               <p>Your shared space is empty</p>
-              <p className="empty-hint">Type below, attach a file, paste with Ctrl+V, or drop anywhere</p>
+              <p className="empty-hint">Type below, attach a file, paste, or drop anywhere</p>
             </div>
           ) : (
             items.map((item) => (

@@ -83,7 +83,7 @@ export default function Composer({ onSend, onPasteImage, onPasteFiles, onFilesSe
         <textarea
           ref={textareaRef}
           className="composer-input"
-          placeholder="Type something, or paste text / screenshots..."
+          placeholder="Type something, or paste text and images..."
           rows={1}
           onInput={autoResize}
           onKeyDown={handleKeyDown}
@@ -97,7 +97,7 @@ export default function Composer({ onSend, onPasteImage, onPasteFiles, onFilesSe
         </button>
       </div>
       <p className="composer-hint">
-        <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> new line · <kbd>Ctrl+V</kbd> paste anywhere
+        Enter to send · Shift+Enter for new line · Paste anywhere on the page
       </p>
     </div>
   );
