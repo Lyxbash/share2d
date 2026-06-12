@@ -25,7 +25,6 @@ export default function Room() {
   const [deletingIds, setDeletingIds] = useState(new Set());
   const socketRef = useRef(null);
   const socketIdRef = useRef(null);
-  const fileInputRef = useRef(null);
   const dragCounter = useRef(0);
   const prevPresence = useRef(1);
 
@@ -229,9 +228,6 @@ export default function Room() {
             <button className={`icon-btn ${showQr ? 'active' : ''}`} onClick={() => setShowQr(!showQr)} title="QR code">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><line x1="21" y1="14" x2="21" y2="21"/><line x1="14" y1="21" x2="21" y2="21"/></svg>
             </button>
-            <button className="icon-btn" onClick={() => fileInputRef.current?.click()} title="Upload file">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-            </button>
             {items.length > 0 && (
               <button className="icon-btn danger" onClick={handleClearAll} title="Clear all">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
@@ -264,7 +260,7 @@ export default function Room() {
           <div className="empty-state">
             <div className="empty-icon">✦</div>
             <p>Your shared space is empty</p>
-            <p className="empty-hint">Type below, paste with Ctrl+V, or drop files anywhere</p>
+            <p className="empty-hint">Type below, attach a file, paste with Ctrl+V, or drop anywhere</p>
           </div>
         ) : (
           items.map((item) => (
@@ -284,17 +280,7 @@ export default function Room() {
         onSend={handleSend}
         onPasteImage={uploadBlob}
         onPasteFiles={(files) => files.forEach(uploadFile)}
-      />
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        hidden
-        onChange={(e) => {
-          for (const file of e.target.files) uploadFile(file);
-          e.target.value = '';
-        }}
+        onFilesSelected={uploadFile}
       />
 
       {toast && <div className="toast">{toast}</div>}

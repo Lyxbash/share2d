@@ -24,8 +24,27 @@
   box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
 }
 
+.composer-attach {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 10px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.composer-attach:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .composer-input {
   flex: 1;
+  min-width: 0;
   resize: none;
   border: none;
   background: transparent;

@@ -43,6 +43,7 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 - **Create or join a room** with a 4-character code
 - **Type text** in the bottom composer, or **Ctrl+V** to paste anywhere on the page
 - **Paste screenshots** — Win+Shift+S (Windows) → Ctrl+V sends the image instantly
+- **Attach files** — paperclip button on the left of the typing box
 - **Drag and drop** files, images, PDFs, code files
 - **Realtime sync** — every connected device sees updates immediately
 - **QR code** to join from your phone in one scan
@@ -67,7 +68,7 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 | Send text | Type in composer → Enter |
 | New line | Shift + Enter |
 | Paste text / screenshot | Ctrl + V anywhere on the page |
-| Upload file | Drag onto page, or use the attach button |
+| Upload file | Paperclip in the typing box, drag onto page, or Ctrl+V |
 
 ---
 

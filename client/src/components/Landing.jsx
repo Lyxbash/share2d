@@ -52,7 +52,7 @@ export default function Landing() {
           </button>
         </form>
 
-        <p className="hint">Type, paste, or drop files — shared instantly across every device in the room.</p>
+        <p className="hint">Type, paste, or drop files - shared instantly across every device in the room.</p>
       </div>
     </div>
   );
