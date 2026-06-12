@@ -1,0 +1,13 @@
+{
+  "name": "share2d",
+  "short_name": "share2d",
+  "description": "Live shared clipboard — paste, share, done.",
+  "icons": [
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "theme_color": "#7c6ff0",
+  "background_color": "#09090b",
+  "display": "standalone",
+  "start_url": "/"
+}
