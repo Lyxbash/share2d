@@ -27,10 +27,35 @@ function DeleteButton({ onClick }) {
   );
 }
 
+function ItemToolbar({ timestamp, children }) {
+  return (
+    <div className="item-toolbar">
+      <div className="item-toolbar-actions">{children}</div>
+      <span className="item-time">{formatTime(timestamp)}</span>
+    </div>
+  );
+}
+
 export default function ShareItem({ item, deleting, onImageClick, onDelete, showToast }) {
   const copyText = () => {
     navigator.clipboard.writeText(item.content);
     showToast('Copied');
+  };
+
+  const copyImage = async () => {
+    try {
+      const res = await fetch(item.url);
+      const blob = await res.blob();
+      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+      showToast('Image copied');
+    } catch {
+      try {
+        await navigator.clipboard.writeText(`${window.location.origin}${item.url}`);
+        showToast('Image link copied');
+      } catch {
+        showToast('Could not copy image');
+      }
+    }
   };
 
   const handleDelete = () => onDelete(item.id);
@@ -40,11 +65,10 @@ export default function ShareItem({ item, deleting, onImageClick, onDelete, show
       <div className={`share-item ${item.type} ${deleting ? 'deleting' : ''}`}>
         <div className="item-header">
           <span className="item-type">{item.type === 'code' ? 'Code' : 'Text'}</span>
-          <div className="item-actions">
-            <span className="item-time">{formatTime(item.timestamp)}</span>
+          <ItemToolbar timestamp={item.timestamp}>
             <button className="action-btn" onClick={copyText} title="Copy">Copy</button>
             <DeleteButton onClick={handleDelete} />
-          </div>
+          </ItemToolbar>
         </div>
         <pre className="item-content">{item.content}</pre>
       </div>
@@ -56,10 +80,10 @@ export default function ShareItem({ item, deleting, onImageClick, onDelete, show
       <div className={`share-item image ${deleting ? 'deleting' : ''}`}>
         <div className="item-header">
           <span className="item-type">Image</span>
-          <div className="item-actions">
-            <span className="item-time">{formatTime(item.timestamp)}</span>
+          <ItemToolbar timestamp={item.timestamp}>
+            <button className="action-btn" onClick={copyImage} title="Copy image">Copy</button>
             <DeleteButton onClick={handleDelete} />
-          </div>
+          </ItemToolbar>
         </div>
         <div className="image-wrap">
           <img
@@ -81,10 +105,9 @@ export default function ShareItem({ item, deleting, onImageClick, onDelete, show
     <div className={`share-item file ${deleting ? 'deleting' : ''}`}>
       <div className="item-header">
         <span className="item-type">File</span>
-        <div className="item-actions">
-          <span className="item-time">{formatTime(item.timestamp)}</span>
+        <ItemToolbar timestamp={item.timestamp}>
           <DeleteButton onClick={handleDelete} />
-        </div>
+        </ItemToolbar>
       </div>
       <a href={item.url} download={item.filename} className="file-card">
         <span className="file-icon">{fileIcon(item.mimeType)}</span>

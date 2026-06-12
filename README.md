@@ -47,6 +47,7 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 - **Drag and drop** files, images, PDFs, code files
 - **Realtime sync** — every connected device sees updates immediately
 - **QR code** to join from your phone in one scan
+- **Copy** text, code, or images to clipboard
 - **Delete items** or clear the whole room
 - **Works on any device** — phone, tablet, laptop; any network
 - **No account required** — open the link and start sharing
