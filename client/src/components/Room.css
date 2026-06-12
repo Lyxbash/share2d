@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  cursor: default;
 }
 
 .room-header {
@@ -42,6 +43,9 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   transition: color 0.15s;
+  cursor: pointer;
+  user-select: none;
+  caret-color: transparent;
 }
 
 .room-code:hover { color: var(--accent); }
@@ -184,6 +188,9 @@
   text-align: center;
   padding: 5rem 1rem;
   color: var(--text-muted);
+  user-select: none;
+  cursor: default;
+  caret-color: transparent;
 }
 
 .empty-icon {

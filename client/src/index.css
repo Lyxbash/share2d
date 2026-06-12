@@ -112,6 +112,7 @@ button {
 input, textarea {
   font-family: inherit;
   outline: none;
+  cursor: text;
 }
 
 a { cursor: pointer; }

@@ -7,6 +7,8 @@
   background: var(--bg);
   background-image: radial-gradient(circle, var(--border) 0.5px, transparent 0.5px);
   background-size: 24px 24px;
+  cursor: default;
+  user-select: none;
 }
 
 .landing-content {
@@ -19,6 +21,7 @@
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+  cursor: default;
 }
 
 .logo {
@@ -26,9 +29,20 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 0.4rem;
+  user-select: none;
+  cursor: default;
+  caret-color: transparent;
 }
 
 .logo span { color: var(--accent); }
+
+.tagline,
+.hint,
+.divider {
+  user-select: none;
+  cursor: default;
+  caret-color: transparent;
+}
 
 .tagline {
   color: var(--text-muted);
@@ -87,6 +101,8 @@
   border-radius: var(--radius);
   color: var(--text);
   transition: border-color 0.15s;
+  cursor: text;
+  user-select: text;
 }
 
 .code-input:focus { border-color: var(--accent); }
