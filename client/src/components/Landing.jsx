@@ -54,7 +54,10 @@ export default function Landing() {
     <div className="landing">
       <ThemeToggle className="landing-theme-toggle" />
       <div className="landing-content">
-        <h1 className="logo">share<span>2d</span></h1>
+        <div className="logo-row">
+          <img src="/favicon.svg" alt="" className="logo-icon" width="44" height="44" />
+          <h1 className="logo">share<span>2d</span></h1>
+        </div>
         <p className="tagline">Paste, share, done. No login. No install.</p>
 
         {error && <p className="join-error" role="alert">{error}</p>}
