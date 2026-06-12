@@ -24,6 +24,7 @@ export default function Room() {
   const [qrDataUrl, setQrDataUrl] = useState('');
   const [lightbox, setLightbox] = useState(null);
   const [deletingIds, setDeletingIds] = useState(new Set());
+  const [roomValid, setRoomValid] = useState(false);
   const socketRef = useRef(null);
   const socketIdRef = useRef(null);
   const dragCounter = useRef(0);
@@ -45,11 +46,45 @@ export default function Room() {
   useEffect(() => {
     if (!code || !ROOM_CODE_REGEX.test(code)) {
       navigate('/', { replace: true });
+      return;
     }
+
+    let cancelled = false;
+    setRoomValid(false);
+
+    fetch(`/api/rooms/${code}`)
+      .then((res) => {
+        if (cancelled) return;
+        if (res.status === 404) {
+          navigate('/', {
+            replace: true,
+            state: { error: 'Room not found. Check the code or create a new room.' },
+          });
+          return;
+        }
+        if (!res.ok) {
+          navigate('/', {
+            replace: true,
+            state: { error: 'Could not join room. Please try again.' },
+          });
+          return;
+        }
+        setRoomValid(true);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          navigate('/', {
+            replace: true,
+            state: { error: 'Could not reach the server. Please try again.' },
+          });
+        }
+      });
+
+    return () => { cancelled = true; };
   }, [code, navigate]);
 
   useEffect(() => {
-    if (!code || !ROOM_CODE_REGEX.test(code)) return;
+    if (!code || !ROOM_CODE_REGEX.test(code) || !roomValid) return;
 
     const socket = io({
       path: '/socket.io',
@@ -94,9 +129,15 @@ export default function Room() {
       prevPresence.current = count;
     });
     socket.on('error', ({ message }) => showToast(message));
+    socket.on('room-not-found', () => {
+      navigate('/', {
+        replace: true,
+        state: { error: 'Room not found. Check the code or create a new room.' },
+      });
+    });
 
     return () => socket.disconnect();
-  }, [code, showToast]);
+  }, [code, roomValid, showToast, navigate]);
 
   const scrollToBottom = useCallback((behavior = 'smooth') => {
     const el = feedRef.current;
@@ -244,6 +285,16 @@ export default function Room() {
     navigator.clipboard.writeText(`${window.location.origin}/room/${code}`);
     showToast('Link copied');
   };
+
+  if (!code || !ROOM_CODE_REGEX.test(code)) return null;
+
+  if (!roomValid) {
+    return (
+      <div className="room room-validating">
+        <div className="validating-msg">Checking room...</div>
+      </div>
+    );
+  }
 
   return (
     <div

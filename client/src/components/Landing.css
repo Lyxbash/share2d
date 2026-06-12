@@ -122,6 +122,18 @@
 .btn-secondary:hover:not(:disabled) { border-color: var(--accent); }
 .btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
 
+.join-error {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--danger-soft);
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  color: var(--danger);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
 .hint {
   margin-top: 1.5rem;
   color: var(--text-muted);

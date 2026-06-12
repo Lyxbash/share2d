@@ -200,10 +200,10 @@ io.on('connection', (socket) => {
       return;
     }
 
-    let room = rooms.get(code);
+    const room = rooms.get(code);
     if (!room) {
-      room = { items: [], lastActive: Date.now(), sockets: new Set() };
-      rooms.set(code, room);
+      socket.emit('room-not-found', { message: 'Room not found' });
+      return;
     }
 
     if (currentRoom) {
