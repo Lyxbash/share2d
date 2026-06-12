@@ -4,6 +4,7 @@ import { io } from 'socket.io-client';
 import QRCode from 'qrcode';
 import ShareItem from './ShareItem';
 import Composer from './Composer';
+import ThemeToggle from './ThemeToggle';
 import './Room.css';
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
@@ -278,9 +279,12 @@ export default function Room() {
             )}
           </div>
         </div>
-        <div className="presence">
-          <span className={`presence-dot ${connected ? (presence > 1 ? 'active' : 'online') : 'offline'}`} />
-          {connected ? presence : '…'}
+        <div className="header-end">
+          <ThemeToggle />
+          <div className="presence">
+            <span className={`presence-dot ${connected ? (presence > 1 ? 'active' : 'online') : 'offline'}`} />
+            {connected ? presence : '…'}
+          </div>
         </div>
       </header>
 

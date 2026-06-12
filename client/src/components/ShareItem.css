@@ -84,8 +84,8 @@
 
 .action-btn {
   padding: 0.2rem 0.55rem;
-  background: transparent;
-  color: var(--text-muted);
+  background: var(--surface2);
+  color: var(--text);
   border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 0.72rem;

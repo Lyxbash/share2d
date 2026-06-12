@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import './Landing.css';
 
 export default function Landing() {
@@ -28,6 +29,7 @@ export default function Landing() {
 
   return (
     <div className="landing">
+      <ThemeToggle className="landing-theme-toggle" />
       <div className="landing-content">
         <h1 className="logo">share<span>2d</span></h1>
         <p className="tagline">Paste, share, done. No login. No install.</p>

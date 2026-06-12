@@ -51,7 +51,7 @@ Most sharing tools get in the way. They need accounts, app installs, email verif
 - **Delete items** or clear the whole room
 - **Works on any device** - phone, tablet, laptop; any network
 - **No account required** - open the link and start sharing
-- **Dark / light mode** - follows your system theme
+- **Theme toggle** - light or dark (dark by default; top-right; saved in your browser)
 
 ---
 
