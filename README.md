@@ -121,7 +121,3 @@ npm run start:prod   # production build + serve on one port
 | Max text length | ~100 KB |
 | Room lifetime | 24 hours (inactive) |
 | Access | Anyone with the room code |
-
----
-
-Built as a learning project — and turned into something genuinely useful.
