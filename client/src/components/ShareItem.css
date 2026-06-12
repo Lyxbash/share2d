@@ -19,7 +19,7 @@
 }
 
 @keyframes itemIn {
-  from { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -103,6 +103,25 @@
   padding: 0;
   background: transparent;
   color: var(--text);
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 20%, transparent) transparent;
+}
+
+.item-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.item-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.item-content::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 22%, var(--border));
+  border-radius: 100px;
+}
+
+.item-content::-webkit-scrollbar-button {
+  display: none;
 }
 
 .share-item.code .item-content {

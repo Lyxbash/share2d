@@ -50,6 +50,52 @@ body.editor-mode {
   background: var(--bg-editor);
   background-image: radial-gradient(circle, var(--border) 0.5px, transparent 0.5px);
   background-size: 24px 24px;
+  overflow: hidden;
+  height: 100%;
+}
+
+html:has(body.editor-mode) {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Subtle scrollbars — match app aesthetic */
+.scroll-subtle {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scroll-subtle:hover,
+.scroll-subtle:focus-within {
+  scrollbar-color: color-mix(in srgb, var(--accent) 30%, transparent) transparent;
+}
+
+.scroll-subtle::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scroll-subtle::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-subtle::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 100px;
+}
+
+.scroll-subtle:hover::-webkit-scrollbar-thumb,
+.scroll-subtle:focus-within::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+.scroll-subtle::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.scroll-subtle::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
 
 button {

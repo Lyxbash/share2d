@@ -56,7 +56,7 @@ function sanitizeItemsForClient(items) {
 
 function trimRoomItems(room) {
   while (room.items.length > MAX_ITEMS_PER_ROOM) {
-    const removed = room.items.pop();
+    const removed = room.items.shift();
     if (removed?.filePath && fs.existsSync(removed.filePath)) fs.unlinkSync(removed.filePath);
   }
 }
@@ -163,7 +163,7 @@ app.post('/api/rooms/:code/files', (req, res) => {
       url: `/files/${req.file.filename}`,
     });
 
-    room.items.unshift(item);
+    room.items.push(item);
     trimRoomItems(room);
     io.to(code).emit('item', { ...sanitizeItemForClient(item), senderId: req.headers['x-socket-id'] || null });
     res.json(sanitizeItemForClient(item));
@@ -232,7 +232,7 @@ io.on('connection', (socket) => {
 
     touchRoom(room);
     const item = createItem(isCode(text) ? 'code' : 'text', { content: text });
-    room.items.unshift(item);
+    room.items.push(item);
     trimRoomItems(room);
     io.to(currentRoom).emit('item', { ...sanitizeItemForClient(item), senderId: socket.id });
   });

@@ -27,6 +27,9 @@ export default function Room() {
   const socketIdRef = useRef(null);
   const dragCounter = useRef(0);
   const prevPresence = useRef(1);
+  const feedRef = useRef(null);
+  const isNearBottomRef = useRef(true);
+  const prevItemCountRef = useRef(0);
 
   const showToast = useCallback((msg) => {
     setToast(msg);
@@ -71,7 +74,7 @@ export default function Room() {
     socket.on('item', (item) => {
       setItems((prev) => {
         if (prev.some((i) => i.id === item.id)) return prev;
-        return [item, ...prev];
+        return [...prev, item];
       });
       if (item.senderId && item.senderId !== socketIdRef.current) {
         showToast('New item received');
@@ -93,6 +96,45 @@ export default function Room() {
 
     return () => socket.disconnect();
   }, [code, showToast]);
+
+  const scrollToBottom = useCallback((behavior = 'smooth') => {
+    const el = feedRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior });
+  }, []);
+
+  useEffect(() => {
+    const joinedWithHistory = prevItemCountRef.current === 0 && items.length > 0;
+    prevItemCountRef.current = items.length;
+
+    if (isNearBottomRef.current || joinedWithHistory) {
+      if (joinedWithHistory) isNearBottomRef.current = true;
+      scrollToBottom(joinedWithHistory ? 'instant' : 'smooth');
+    }
+  }, [items, scrollToBottom]);
+
+  const handleFeedScroll = () => {
+    const el = feedRef.current;
+    if (!el) return;
+    isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 100;
+  };
+
+  const handleRoomWheel = useCallback((e) => {
+    const feed = feedRef.current;
+    if (!feed) return;
+    if (e.target.closest('.room-header, .qr-panel, .composer, .upload-bar')) return;
+
+    const nested = e.target.closest('.item-content');
+    if (nested) {
+      const atTop = nested.scrollTop <= 0;
+      const atBottom = nested.scrollTop + nested.clientHeight >= nested.scrollHeight - 1;
+      if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atBottom)) return;
+    }
+
+    if (!feed.contains(e.target)) {
+      e.preventDefault();
+      feed.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    }
+  }, []);
 
   useEffect(() => {
     const url = `${window.location.origin}/room/${code}`;
@@ -206,6 +248,7 @@ export default function Room() {
     <div
       className="room"
       onPaste={handleGlobalPaste}
+      onWheel={handleRoomWheel}
       onDragEnter={handleDragEnter}
       onDragOver={(e) => e.preventDefault()}
       onDragLeave={handleDragLeave}
@@ -255,25 +298,27 @@ export default function Room() {
         </div>
       )}
 
-      <div className="items-feed">
-        {items.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-icon">✦</div>
-            <p>Your shared space is empty</p>
-            <p className="empty-hint">Type below, attach a file, paste with Ctrl+V, or drop anywhere</p>
-          </div>
-        ) : (
-          items.map((item) => (
-            <ShareItem
-              key={item.id}
-              item={item}
-              deleting={deletingIds.has(item.id)}
-              onImageClick={setLightbox}
-              onDelete={handleDelete}
-              showToast={showToast}
-            />
-          ))
-        )}
+      <div className="feed-scroll scroll-subtle" ref={feedRef} onScroll={handleFeedScroll}>
+        <div className="items-feed">
+          {items.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-icon">✦</div>
+              <p>Your shared space is empty</p>
+              <p className="empty-hint">Type below, attach a file, paste with Ctrl+V, or drop anywhere</p>
+            </div>
+          ) : (
+            items.map((item) => (
+              <ShareItem
+                key={item.id}
+                item={item}
+                deleting={deletingIds.has(item.id)}
+                onImageClick={setLightbox}
+                onDelete={handleDelete}
+                showToast={showToast}
+              />
+            ))
+          )}
+        </div>
       </div>
 
       <Composer

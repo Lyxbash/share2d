@@ -55,6 +55,21 @@
   max-height: 200px;
   overflow-y: auto;
   cursor: text;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 20%, transparent) transparent;
+}
+
+.composer-input::-webkit-scrollbar {
+  width: 4px;
+}
+
+.composer-input::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--accent) 25%, var(--border));
+  border-radius: 100px;
+}
+
+.composer-input::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .composer-input::placeholder {
